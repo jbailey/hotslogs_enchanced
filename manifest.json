@@ -1,0 +1,21 @@
+{
+  "manifest_version": 2,
+
+  "name": "HotsLogs Enhanced",
+  "description": "Some simple enhancements",
+  "version": "1.0",
+
+  "permissions": [
+    "activeTab",
+    "https://ajax.googleapis.com/"
+  ],
+
+  "content_scripts": [
+    {
+      "matches": ["https://www.hotslogs.com/Player/MatchHistory*"],
+      "css": ["hotslogs_enhanced.css"],
+      "js": ["jquery.min.js", "hotslogs_match_history.js"],
+      "run_at": "document_end"
+    }
+  ]
+}
