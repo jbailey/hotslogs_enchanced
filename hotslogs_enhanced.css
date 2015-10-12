@@ -10,10 +10,11 @@
   display: table;
   empty-cells: show;
   font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 16px;
   table-layout: auto;
   width: 938px;
   -webkit-border-horizontal-spacing: 0px;
   -webkit-border-vertical-spacing: 0px;
+  margin-bottom: 10px;
 }

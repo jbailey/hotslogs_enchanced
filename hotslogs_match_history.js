@@ -25,7 +25,9 @@
         losses += 1;
       }
       mmrChange = parseInt($(row).find("td").eq(8).html(), 10);
-      netMMR += mmrChange;
+      if (!isNaN(mmrChange)) {
+        netMMR += mmrChange;
+      }
     }
     winrate = (wins / rows.length) * 100;
     return {

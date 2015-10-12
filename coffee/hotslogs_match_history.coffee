@@ -29,7 +29,7 @@ lastXSummary = (rows) ->
       losses += 1
 
     mmrChange = parseInt($(row).find("td").eq(8).html(), 10)
-    netMMR += mmrChange
+    netMMR += mmrChange unless isNaN(mmrChange)
 
   winrate = (wins / rows.length) * 100
   {
