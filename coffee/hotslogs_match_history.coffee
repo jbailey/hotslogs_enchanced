@@ -1,4 +1,6 @@
-statsBaseTable = "<table class='statsTable' id='matchHistoryStats' style='width:100%;table-layout:auto;empty-cells:show;'> \
+statsBaseTable = "
+  <a class='btn' href='javascript:void(0);' id='refreshStats'>Refresh Stats</a>
+  <table class='statsTable' id='matchHistoryStats' style='width:100%;table-layout:auto;empty-cells:show;'> \
   <tr> \
   <th>Last X Games</th> \
   <th>Wins</th> \
@@ -9,14 +11,28 @@ statsBaseTable = "<table class='statsTable' id='matchHistoryStats' style='width:
   <tbody id='statsTableBody'>
   </tbody>
   </table> \
-  ";
+  "
 
 gameBreakout = [10, 20, 50, 100];
 historyTable = null
+statsTable = null
 
 
 init = ->
+  findHistoryTable()
+  createStatsTable()
+  $("#refreshStats").click ->
+    refreshStatsTable()
+
+refreshStatsTable = ->
+  clearTable()
+  rows = getRows()
+  fillTable rows
+
+findHistoryTable = ->
   this.historyTable = $('#ctl00_MainContent_ctl00_MainContent_RadGridMatchHistoryPanel')
+  if this.historyTable == undefined
+    this.historyTable = $('ctl00_MainContent_RadGridMatchHistory_ctl00')
 
 lastXSummary = (rows) ->
   wins = 0
@@ -37,19 +53,29 @@ lastXSummary = (rows) ->
     wins: wins,
     losses: losses,
     winrate: winrate,
-    netMMR: netMMR
+    netMMR: Math.round(netMMR)
   }
 
 
 createStatsTable = ->
   this.historyTable.before statsBaseTable
   rows = this.historyTable.find("tr.rgRow")
-  statsTable = $('#matchHistoryStats')
+  this.statsTable = $('#matchHistoryStats')
+  fillTable(rows)
+
+getRows = ->
+  rows = this.historyTable.find("tr.rgRow")
+  return rows
+
+fillTable = (rows) ->
   for x in gameBreakout
     xrows = rows[0..x-1]
     summary = lastXSummary(xrows)
     addSummaryToStatsTable(summary)
   return
+
+clearTable = ->
+  $(this.statsTable).find("tr:gt(0)").remove()
 
 addSummaryToStatsTable = (summary) ->
   statRow = "<tr> \
@@ -63,4 +89,3 @@ addSummaryToStatsTable = (summary) ->
   $("#statsTableBody").append statRow
 
 init()
-createStatsTable()

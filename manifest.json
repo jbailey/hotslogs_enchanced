@@ -14,7 +14,13 @@
     {
       "matches": ["https://www.hotslogs.com/Player/MatchHistory*"],
       "css": ["hotslogs_enhanced.css"],
-      "js": ["jquery.min.js", "hotslogs_match_history.js"],
+      "js": ["jquery.min.js", "jquery_watcher.js", "hotslogs_match_history.js"],
+      "run_at": "document_end"
+    },
+    {
+      "matches": ["https://www.hotslogs.com/PlayerSearch*"],
+      "css": ["hotslogs_enhanced.css"],
+      "js": ["jquery.min.js", "jquery_watcher.js", "hotslogs_search.js"],
       "run_at": "document_end"
     }
   ]
