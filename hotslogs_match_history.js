@@ -11,6 +11,7 @@
   statsTable = null;
 
   init = function() {
+    console.info("Initializing....");
     findHistoryTable();
     createStatsTable();
     return $("#refreshStats").click(function() {
@@ -28,7 +29,10 @@
   findHistoryTable = function() {
     this.historyTable = $('#ctl00_MainContent_ctl00_MainContent_RadGridMatchHistoryPanel');
     if (this.historyTable === void 0) {
-      return this.historyTable = $('ctl00_MainContent_RadGridMatchHistory_ctl00');
+      this.historyTable = $('ctl00_MainContent_RadGridMatchHistory_ctl00');
+    }
+    if (this.historyTable === void 0) {
+      return console.info("Could not find history table");
     }
   };
 
@@ -49,13 +53,13 @@
         netMMR += mmrChange;
       }
     }
-    winrate = (wins / rows.length) * 100;
+    winrate = Math.round((wins / rows.length) * 100);
     return {
       games: rows.length,
       wins: wins,
       losses: losses,
       winrate: winrate,
-      netMMR: Math.round(netMMR)
+      netMMR: netMMR
     };
   };
 

@@ -25,7 +25,6 @@
     var i, len, mmr, name, region, results, row, rows;
     showAllResults();
     setFilter();
-    console.log(filter);
     rows = this.resultTable.find("tbody tr");
     results = [];
     for (i = 0, len = rows.length; i < len; i++) {

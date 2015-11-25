@@ -19,6 +19,7 @@ statsTable = null
 
 
 init = ->
+  console.info "Initializing...."
   findHistoryTable()
   createStatsTable()
   $("#refreshStats").click ->
@@ -33,6 +34,8 @@ findHistoryTable = ->
   this.historyTable = $('#ctl00_MainContent_ctl00_MainContent_RadGridMatchHistoryPanel')
   if this.historyTable == undefined
     this.historyTable = $('ctl00_MainContent_RadGridMatchHistory_ctl00')
+  if this.historyTable == undefined
+    console.info "Could not find history table"
 
 lastXSummary = (rows) ->
   wins = 0
@@ -47,13 +50,13 @@ lastXSummary = (rows) ->
     mmrChange = parseInt($(row).find("td").eq(8).html(), 10)
     netMMR += mmrChange unless isNaN(mmrChange)
 
-  winrate = (wins / rows.length) * 100
+  winrate = Math.round((wins / rows.length) * 100)
   {
     games: rows.length,
     wins: wins,
     losses: losses,
     winrate: winrate,
-    netMMR: Math.round(netMMR)
+    netMMR: netMMR
   }
 
 
