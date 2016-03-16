@@ -42,12 +42,17 @@ lastXSummary = (rows) ->
   losses = 0
   netMMR = 0
   for row in rows
+    console.log row
+    map = $(row).find("td").eq(2).html()
+    console.log $(row).css("background-color")
     if $(row).css('background-color') == 'rgb(144, 238, 144)'
       wins += 1
+      console.log "win on #{map}"
     else
       losses += 1
+      console.log "loss on #{map}"
 
-    mmrChange = parseInt($(row).find("td").eq(8).html(), 10)
+    mmrChange = parseInt($(row).find("td").eq(9).html(), 10)
     netMMR += mmrChange unless isNaN(mmrChange)
 
   winrate = Math.round((wins / rows.length) * 100)
@@ -59,10 +64,9 @@ lastXSummary = (rows) ->
     netMMR: netMMR
   }
 
-
 createStatsTable = ->
   this.historyTable.before statsBaseTable
-  rows = this.historyTable.find("tr.rgRow")
+  rows = this.historyTable.find("tr.rgRow, tr.rgAltRow")
   this.statsTable = $('#matchHistoryStats')
   fillTable(rows)
 

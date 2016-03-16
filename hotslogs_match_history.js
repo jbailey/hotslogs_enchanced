@@ -37,18 +37,23 @@
   };
 
   lastXSummary = function(rows) {
-    var i, len, losses, mmrChange, netMMR, row, winrate, wins;
+    var i, len, losses, map, mmrChange, netMMR, row, winrate, wins;
     wins = 0;
     losses = 0;
     netMMR = 0;
     for (i = 0, len = rows.length; i < len; i++) {
       row = rows[i];
+      console.log(row);
+      map = $(row).find("td").eq(2).html();
+      console.log($(row).css("background-color"));
       if ($(row).css('background-color') === 'rgb(144, 238, 144)') {
         wins += 1;
+        console.log("win on " + map);
       } else {
         losses += 1;
+        console.log("loss on " + map);
       }
-      mmrChange = parseInt($(row).find("td").eq(8).html(), 10);
+      mmrChange = parseInt($(row).find("td").eq(9).html(), 10);
       if (!isNaN(mmrChange)) {
         netMMR += mmrChange;
       }
@@ -66,7 +71,7 @@
   createStatsTable = function() {
     var rows;
     this.historyTable.before(statsBaseTable);
-    rows = this.historyTable.find("tr.rgRow");
+    rows = this.historyTable.find("tr.rgRow, tr.rgAltRow");
     this.statsTable = $('#matchHistoryStats');
     return fillTable(rows);
   };
