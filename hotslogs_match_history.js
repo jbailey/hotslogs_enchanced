@@ -71,14 +71,14 @@
   createStatsTable = function() {
     var rows;
     this.historyTable.before(statsBaseTable);
-    rows = this.historyTable.find("tr.rgRow, tr.rgAltRow");
+    rows = getRows();
     this.statsTable = $('#matchHistoryStats');
     return fillTable(rows);
   };
 
   getRows = function() {
     var rows;
-    rows = this.historyTable.find("tr.rgRow");
+    rows = this.historyTable.find("tr.rgRow, tr.rgAltRow");
     return rows;
   };
 

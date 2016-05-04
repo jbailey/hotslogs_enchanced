@@ -66,12 +66,12 @@ lastXSummary = (rows) ->
 
 createStatsTable = ->
   this.historyTable.before statsBaseTable
-  rows = this.historyTable.find("tr.rgRow, tr.rgAltRow")
+  rows = getRows()
   this.statsTable = $('#matchHistoryStats')
   fillTable(rows)
 
 getRows = ->
-  rows = this.historyTable.find("tr.rgRow")
+  rows = this.historyTable.find("tr.rgRow, tr.rgAltRow")
   return rows
 
 fillTable = (rows) ->
